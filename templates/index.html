@@ -1,0 +1,75 @@
+
+{% extends "base.html" %}
+
+
+
+{% block content %}
+
+
+
+<!-- <div class="box"> -->
+<div class="container">
+    <h1>Your Shopping is easy</h1>
+
+
+</div>
+<div class="container">
+    <div class="row">    
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        {% endif%}
+        {% endwith %}
+    </div>
+
+</div>
+
+
+
+<div class="container">
+    <div class="row justify-content-center product-grid-style">
+
+        {% for product in products%}
+            <div class="col-11 col-sm-6 col-lg-4 col-xl-3">
+        
+                <div class="product-details">
+
+                    <div class="product-img">
+
+                        <div class="label-offer bg-red">Sale</div><img src="{{ product.photo }}" alt="...">
+
+                            <form action="{{ url_for('add') }}" method="POST">
+                                <!-- <div class="product-cart">
+                                    <a href="#!"><i class="fa-solid fa fa-eye"></i></a>
+                                    <a href="#!"><i class="fas fa-cart-plus"></i></a>
+                                    <a href="#!"><i class="fas fa-heart"></i></a>
+                                </div> -->
+
+                                <input type="hidden" name="product_id" value="{{ product.id }}"/>
+                                <input type="text" class="product-quantity" name="quantity" value="1" size="2" />
+                                <input type="submit" value="Add to Cart" class="btnAddAction" />
+                                <!-- <input type="submit" value="Add to Cart" /> -->
+
+                            </form>
+                    </div>
+
+                    <div class="product-info">
+                        <a href="#!">{{ product.name }}</a>
+                        <p class="price text-center m-0">
+                            <!-- <span class="red line-through me-2">${{ product.price * 1.1 }}</span> -->
+                            <span>${{ product.price }}</span>
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>  
+        {% endfor %}      
+        
+                       
+
+
+
+{% endblock %}
